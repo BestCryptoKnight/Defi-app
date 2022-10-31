@@ -6,7 +6,7 @@ const UnstoppableLender = contract.fromArtifact('UnstoppableLender');
 const ReceiverContract = contract.fromArtifact('ReceiverUnstoppable');
 
 const { expect } = require('chai');
-
+console.log('ok');
 describe('[Challenge] Unstoppable', function () {
 
     const [deployer, attacker, someUser, ...otherAccounts] = accounts;
@@ -33,9 +33,9 @@ describe('[Challenge] Unstoppable', function () {
             await this.token.balanceOf(attacker)
         ).to.be.bignumber.equal(INITIAL_ATTACKER_BALANCE);
 
-         // Show it's possible for anyone to take out a flash loan
-         this.receiverContract = await ReceiverContract.new(this.pool.address, { from: someUser });
-         await this.receiverContract.executeFlashLoan(10, { from: someUser });
+        // Show it's possible for anyone to take out a flash loan
+        this.receiverContract = await ReceiverContract.new(this.pool.address, { from: someUser });
+        await this.receiverContract.executeFlashLoan(10, { from: someUser });
     });
 
     it('Exploit', async function () {
